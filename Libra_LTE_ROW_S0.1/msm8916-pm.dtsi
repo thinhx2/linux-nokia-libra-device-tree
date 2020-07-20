@@ -145,20 +145,20 @@
 
 			qcom,system-mode@0 {
 				qcom,l2 = "l2_cache_gdhs";
-				qcom,latency-us = <0x2a94>;
+				qcom,latency-us = <0xf0>;
 				qcom,ss-power = <530>;
-				qcom,energy-overhead = <0xfb9a3>;
-				qcom,time-overhead = <0x678>;
+				qcom,energy-overhead = <0x33450>;
+				qcom,time-overhead = <0x15e>;
 				qcom,min-cpu-mode= "standalone_pc";
 				qcom,sync-mode;
 			};
 
 			qcom,system-mode@1 {
 				qcom,l2 = "l2_cache_pc";
-				qcom,latency-us = <11030>;
+				qcom,latency-us = <0x2a94>;
 				qcom,ss-power = <490>;
-				qcom,energy-overhead = <972390>;
-				qcom,time-overhead = <1580>;
+				qcom,energy-overhead = <0xfb9a3>;
+				qcom,time-overhead = <0x678>;
 				qcom,min-cpu-mode= "pc";
 				qcom,send-rpm-sleep-set;
 				qcom,sync-mode;

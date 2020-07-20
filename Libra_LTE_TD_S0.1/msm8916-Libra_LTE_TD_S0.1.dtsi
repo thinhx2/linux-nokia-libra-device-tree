@@ -330,11 +330,12 @@
 	pinctrl-1 = <0x97 0x98 0x99 0x9a>;
 
 	#address-cells = <0>;
-	interrupt-parent = <&sdhc_2>;
+	interrupt-parent = <0x9b>;
 	interrupts = <0 1>;
 	#interrupt-cells = <1>;
 	interrupt-map-mask = <0xffffffff>;
 	interrupt-names = "hc_irq", "pwr_irq";
+        interrupt-map = <0x0 0x1 0x0 0x7d 0x0 0x1 0x1 0x0 0xdd 0x0>;
 
 	status = "ok";
 };

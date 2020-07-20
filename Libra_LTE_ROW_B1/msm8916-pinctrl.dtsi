@@ -394,7 +394,7 @@
 		};
 
 		pmx_qdsd_clk {
-			qcom,pins = <0xd0 0x0>;
+			qcom,pins = <0xd2 0x0>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-clk";
 			qdsd_clk_sdcard: clk_sdcard {
@@ -416,7 +416,7 @@
 		};
 
 		pmx_qdsd_cmd {
-			qcom,pins = <0xd0 0x1>;
+			qcom,pins = <0xd2 0x1>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-cmd";
 			qdsd_cmd_sdcard: cmd_sdcard {
@@ -446,7 +446,7 @@
 		};
 
 		pmx_qdsd_data0 {
-			qcom,pins = <0xd0 0x2>;
+			qcom,pins = <0xd2 0x2>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-data0";
 			qdsd_data0_sdcard: data0_sdcard {
@@ -476,7 +476,7 @@
 		};
 
 		pmx_qdsd_data1 {
-			qcom,pins = <0xd0 0x3>;
+			qcom,pins = <0xd2 0x3>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-data1";
 			qdsd_data1_sdcard: data1_sdcard {
@@ -502,7 +502,7 @@
 		};
 
 		pmx_qdsd_data2 {
-			qcom,pins = <0xd0 0x4>;
+			qcom,pins = <0xd2 0x4>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-data2";
 			qdsd_data2_sdcard: data2_sdcard {
@@ -528,7 +528,7 @@
 		};
 
 		pmx_qdsd_data3 {
-			qcom,pins = <0xd0 0x5>;
+			qcom,pins = <0xd2 0x5>;
 			qcom,num-grp-pins = <1>;
 			label = "qdsd-data3";
 			qdsd_data3_sdcard: data3_sdcard {

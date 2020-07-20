@@ -16,7 +16,7 @@
 #include "msm8916-memory.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. MSM 8916 MTP";
+	model = "Qualcomm MSM 8916 Libra LTE ROW S0.1";
 	compatible = "qcom,msm8916-mtp", "qcom,msm8916", "qcom,mtp";
 	qcom,board-id = <0x80 0xf1>;
 };
