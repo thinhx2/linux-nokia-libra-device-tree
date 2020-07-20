@@ -16,7 +16,7 @@
  * VERSION = "1.0"
  *---------------------------------------------------------------------------*/
 &mdss_mdp {
-      dsi_giza_720p_video:	qcom,mdss_dsi_giza_720p_video {
+      mdss_dsi_giza_720p_video:	qcom,mdss_dsi_giza_720p_video {
 				qcom,mdss-dsi-panel-name = "giza 720p video mode dsi panel";
 				qcom,mdss-dsi-panel-controller = <0x1e>;
 				qcom,mdss-dsi-panel-type = "dsi_video_mode";
