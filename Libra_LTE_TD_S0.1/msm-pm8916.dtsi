@@ -578,7 +578,7 @@
 			qcom,cdc-vdda-h-voltage = <1800000 1800000>;
 			qcom,cdc-vdda-h-current = <20000>;
 
-			cdc-vdd-px-supply = <0xc1>
+			cdc-vdd-px-supply = <0xc1>;
 			qcom,cdc-vdd-px-voltage = <1800000 2200000>;
 			qcom,cdc-vdd-px-current = <770000>;
 

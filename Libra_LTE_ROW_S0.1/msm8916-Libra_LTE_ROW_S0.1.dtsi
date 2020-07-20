@@ -188,7 +188,7 @@
 
 &soc {
         variant {
-		compatible = "libralte,ROW,S01"
+		compatible = "libralte,ROW,S01";
 
 		bom_a {
 			id = "row.ss";

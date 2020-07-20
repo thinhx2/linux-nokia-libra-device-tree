@@ -1251,7 +1251,8 @@
 		qcom,clk-freq-out = <0x55730>;
 		qcom,clk-freq-in  = <19200000>;
 		pinctrl-names = "i2c_active", "i2c_sleep";
-		qcom,clk-freq-out = <0x55730>;
+                pinctrl-0 = <0xaa>;
+		pinctrl-1 = <0xab>;
 		qcom,noise-rjct-scl = <0>;
 		qcom,noise-rjct-sda = <0>;
 		qcom,bam-pipe-idx-cons = <6>;

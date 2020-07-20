@@ -12,6 +12,10 @@
 
 #include <dt-bindings/msm/msm-bus-rule-ops.h>
 
+&soc {
+	ad_hoc_bus: ad-hoc-bus { };
+};
+
 &ad_hoc_bus {
 	compatible = "qcom,msm-bus-device";
 	reg = <0x580000 0x14000>,
@@ -84,7 +88,7 @@
 		qcom,qport = <8>;
 		qcom,ap-owned;
 		qcom,connections = <0x2e 0x2f>;
-		qcom,bus-dev = <0x30>
+		qcom,bus-dev = <0x30>;
 		qcom,qos-mode = "bypass";
 		qcom,buswidth = <16>;
 	};
@@ -95,7 +99,7 @@
 		qcom,ap-owned;
 		qcom,qport = <6>;
 		qcom,connections = <0x2e 0x2f>;
-		qcom,bus-dev = <0x30>
+		qcom,bus-dev = <0x30>;
 		qcom,qos-mode = "bypass";
 		qcom,buswidth = <16>;
 	};
@@ -603,7 +607,8 @@
 	slv_spdm: slv-spdm {
 		cell-id = <533>;
 		label = "slv-spdm";
-		v
+                qcom,bus-dev = <0x48>;
+
 		qcom,buswidth = <4>;
 	};
 
