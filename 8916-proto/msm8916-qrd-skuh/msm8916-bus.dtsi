@@ -384,9 +384,6 @@
 		qcom,prio-rd = <0>;
 		qcom,prio-wr = <0>;
 		qom,buswidth = <8>;
-		qcom,ws = <10000>;
-		qcom,gp = <5000>;
-		qcom,thmp = <50>;
 	};
 
 	bimc_snoc_mas: bimc-snoc-mas {

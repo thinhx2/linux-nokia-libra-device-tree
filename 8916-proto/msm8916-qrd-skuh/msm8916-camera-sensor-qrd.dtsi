@@ -12,7 +12,7 @@
  */
 &tlmm_pinmux {
 	camera_ldo_pins_default {
-		qcom,pins = <&gp 114>, <&gp 110>;
+		qcom,pins = <0xff 0x72 0xff 0x6e>;
 		qcom,num-grp-pins = <2>;
 		qcom,pin-func = <0>;
 		label = "camera_ldo_pins_default";
@@ -23,7 +23,7 @@
 	};
 
 	camera_ldo_pins_sleep {
-		qcom,pins = <&gp 114>, <&gp 110>;
+		qcom,pins = <0xff 0x72 0xff 0x6e>;
 		qcom,num-grp-pins = <2>;
 		qcom,pin-func = <0>;
 		label = "camera_ldo_pins_suspend";

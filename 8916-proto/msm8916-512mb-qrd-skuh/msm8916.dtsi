@@ -527,7 +527,7 @@
 				<81 512 2048000 4096000>; /* Max. bandwidth */
 		qcom,bus-bw-vectors-bps = <0 400000 20000000 25000000 50000000
 						100000000 200000000 4294967295>;
-		cclocks = <0x39 0x691e0caa 0x39 0x9ad6fb96>;
+		clocks = <0x39 0x23d5727f 0x39 0x861b20ac>;
 		clock-names = "iface_clk", "core_clk";
 
 		qcom,clk-rates = <400000 25000000 50000000 100000000 200000000>;
@@ -1671,7 +1671,7 @@
 		qcom,pre-div-channel-scaling = <0>;
 		qcom,calibration-type = "ratiometric";
 		qcom,scale-function = <1>;
-		qcom,hw-settle-time = <0xb>;
+		qcom,hw-settle-time = <0x2>;
 		qcom,fast-avg-setup = <0>;
 	};
 
@@ -1682,7 +1682,7 @@
 		qcom,pre-div-channel-scaling = <0>;
 		qcom,calibration-type = "ratiometric";
 		qcom,scale-function = <0>;
-		qcom,hw-settle-time = <0xb>;
+		qcom,hw-settle-time = <0x2>;
 		qcom,fast-avg-setup = <0>;
 	};
 

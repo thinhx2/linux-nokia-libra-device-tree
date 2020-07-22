@@ -145,7 +145,7 @@
 				ti,discharge-enable;
 				ti,enable-time = <800>;
 				ti,current-limit = <200000>;
-				ti,en-gpio = <0x4c 0x61 0x0>;
+				ti,en-gpio = <0x48 0x61 0x0>;
 			};
 
 			tps65132_neg: neg-boost {
@@ -155,7 +155,7 @@
 				ti,discharge-enable;
 				ti,enable-time = <800>;
 				ti,current-limit = <40000>;
-				ti,en-gpio = <0x4c 0x20 0x0>;
+				ti,en-gpio = <0x48 0x20 0x0>;
 			};
 		};
 	};
@@ -269,6 +269,8 @@
 		qcom,msm-codec-type = "internal";
 		qcom,msm-mbhc-hphl-swh = <1>;
 		qcom,msm-mbhc-gnd-swh = <0>;
+                qcom,msm-hs-micbias-type = "external";
+		qcom,audio-routing = "RX_BIAS", "MCLK", "SPK_RX_BIAS", "MCLK", "INT_LDO_H", "MCLK", "MIC BIAS External", "Handset Mic", "MIC BIAS External2", "Headset Mic", "MIC BIAS External", "Secondary Mic", "AMIC1", "MIC BIAS External", "AMIC2", "MIC BIAS External2", "AMIC3", "MIC BIAS External";
 		pinctrl-names = "cdc_lines_act", "cdc_lines_sus";
 		pinctrl-0 = <0x105>;
 		pinctrl-1 = <0x106>;

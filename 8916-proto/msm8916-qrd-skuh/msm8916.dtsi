@@ -509,7 +509,7 @@
 		reg-names = "hc_mem", "core_mem";
 
 		interrupts = <0 125 0>, <0 221 0>;
-		interrupt-names = "hc_irq", "pwr_irq";
+		interrupt-names = "hc_irq", "pwr_irq", "status_irq";
 
 		qcom,bus-width = <4>;
 
@@ -1671,7 +1671,7 @@
 		qcom,pre-div-channel-scaling = <0>;
 		qcom,calibration-type = "ratiometric";
 		qcom,scale-function = <1>;
-		qcom,hw-settle-time = <0xb>;
+		qcom,hw-settle-time = <0x2>;
 		qcom,fast-avg-setup = <0>;
 	};
 
@@ -1682,7 +1682,7 @@
 		qcom,pre-div-channel-scaling = <0>;
 		qcom,calibration-type = "ratiometric";
 		qcom,scale-function = <0>;
-		qcom,hw-settle-time = <0xb>;
+		qcom,hw-settle-time = <0x2>;
 		qcom,fast-avg-setup = <0>;
 	};
 

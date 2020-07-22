@@ -1069,7 +1069,7 @@
 		tlmm_gpio_key {
 			qcom,pins = <0xff 107>, <0xff 108>, <0xff 109>;
 			qcom,pin-func = <0>;
-			qcom,num-grp-pins = <3>;
+			qcom,num-grp-pins = <0x1>;
 			label = "tlmm_gpio_key";
 			gpio_key_active: gpio_key_active {
 				drive-strength = <2>;
