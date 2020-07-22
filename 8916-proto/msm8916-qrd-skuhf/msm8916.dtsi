@@ -399,7 +399,6 @@
 		qcom,msm-bus,vectors-KBps = <0x57 0x200 0x0 0x0 0x57 0x200 0xea60 0xea600 0x57 0x200 0x1770 0x1770>;
 		clocks = <0x39 0x72ce8032 0x39 0xa11972e5 0x39 0x6caa736f 0x8 0x79bca5cc>;
 		clock-names = "iface_clk", "core_clk", "sleep_clk", "xo";
-		qcom,bus-clk-rate = <400000000 200000000 100000000>;
 	};
 
 	android_usb: android_usb@086000c8 {
@@ -510,7 +509,7 @@
 		reg-names = "hc_mem", "core_mem";
 
 		interrupts = <0 125 0>, <0 221 0>;
-		interrupt-names = "hc_irq", "pwr_irq";
+		interrupt-names = "hc_irq", "pwr_irq", "status_irq";
 
 		qcom,bus-width = <4>;
 

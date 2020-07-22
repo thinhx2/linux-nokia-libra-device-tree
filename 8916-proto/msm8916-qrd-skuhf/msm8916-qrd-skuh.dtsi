@@ -16,7 +16,7 @@
 
 &tlmm_pinmux {
 	akm_reset_pin {
-		qcom,pins = <&gp 36>;
+		qcom,pins = <0xfe 36>;
 		qcom,pin-func = <0>;
 		qcom,num-grp-pins = <1>;
 		label = "akm_reset_pin";
@@ -31,7 +31,7 @@
 	};
 
 	lis3dh_int1_pin {
-		qcom,pins = <&gp 115>;
+		qcom,pins = <0xfe 115>;
 		qcom,num-grp-pins = <1>;
 		label = "lis3dh_int_pin";
 		lis3dh_int1_default: int1_default {
@@ -45,7 +45,7 @@
 	};
 
 	tps65132-en-pin {
-		qcom,pins = <&gp 32>, <&gp 97>;
+		qcom,pins = <0xfe 32>, <0xfe 97>;
 		qcom,num-grp-pins = <2>;
 		label = "tps65132_en_pins";
 		qcom,pin-func = <0>;
@@ -57,7 +57,7 @@
 	};
 
 	lm3642-en-pin {
-		qcom,pins = <&gp 31>, <&gp 86>;
+		qcom,pins = <0xfe 0x1f 0xfe 0x56>;
 		qcom,num-grp-pins = <2>;
 		label = "lm3642_en_pins";
 		qcom,pin-func = <0>;
@@ -186,7 +186,7 @@
 
 &pmx_mdss {
 	qcom,num-grp-pins = <1>;
-	qcom,pins = <&gp 25>;
+	qcom,pins = <0xfe 25>;
 };
 
 &mdss_dsi0 {
@@ -258,7 +258,7 @@
 
 	sound {
 		compatible = "qcom,msm8x16-audio-codec";
-		qcom,model = "msm8x16-skuhf-snd-card";
+		qcom,model = "msm8x16-skuh-snd-card";
 		qcom,msm-snd-card-id = <0>;
 		qcom,msm-ext-pa = "primary";
 		qcom,msm-codec-type = "internal";
