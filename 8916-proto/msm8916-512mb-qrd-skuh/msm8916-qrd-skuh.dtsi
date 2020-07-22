@@ -1,0 +1,348 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+#include "msm8916-qrd.dtsi"
+#include "dsi-panel-innolux-720p-video.dtsi"
+#include "msm8916-camera-sensor-qrd.dtsi"
+
+&tlmm_pinmux {
+	akm_reset_pin {
+		qcom,pins = <0xff 36>;
+		qcom,pin-func = <0>;
+		qcom,num-grp-pins = <1>;
+		label = "akm_reset_pin";
+		akm_default: akm_default {
+			drive-strength = <6>;
+			bias-pull-up;
+		};
+		akm_sleep: akm_sleep {
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+	lis3dh_int1_pin {
+		qcom,pins = <0xff 115>;
+		qcom,num-grp-pins = <1>;
+		label = "lis3dh_int_pin";
+		lis3dh_int1_default: int1_default {
+			drive-strength = <6>;
+			bias-pull-down;
+		};
+		lis3dh_int1_sleep: int1_sleep {
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+	tps65132-en-pin {
+		qcom,pins = <0xff 32>, <0xff 97>;
+		qcom,num-grp-pins = <2>;
+		label = "tps65132_en_pins";
+		qcom,pin-func = <0>;
+
+		tps65132_en_default: en-default {
+			drive-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+	lm3642-en-pin {
+		qcom,pins = <0xff 31>, <0xff 86>;
+		qcom,num-grp-pins = <2>;
+		label = "lm3642_en_pins";
+		qcom,pin-func = <0>;
+
+		lm3642_en_default: en-default {
+			driver-strength = <2>;
+			bias-disable;
+		};
+		lm3642_en_suspend: en-suspend {
+			driver-strength = <2>;
+			bias-pull-down;
+		};
+	};
+
+};
+
+&i2c_0 { /* BLSP1 QUP2 */
+	akm@c {
+		compatible = "ak,ak09911";
+		reg = <0x0c>;
+		pinctrl-names = "default","sleep";
+		pinctrl-0 = <0xd1>;
+		pinctrl-1 = <0xd2>;
+		vdd-supply = <0x42>;
+		vio-supply = <0x43>;
+		akm,layout = <0x3>;
+		akm,gpio_rstn = <0x48 0x24 0x0>;
+		akm,auto-report;
+	};
+
+	avago@39 {
+		compatible = "avago,apds9930";
+		reg = <0x39>;
+		pinctrl-names = "default","sleep";
+		pinctrl-0 = <0xd3>;
+		pinctrl-1 = <0xd4>;
+		interrupt-parent = <0x48>;
+		interrupts = <113 0x2002>;
+		vdd-supply = <0x42>;
+		vio-supply = <0x43>;
+		avago,irq-gpio = <0x48 0x71 0x2002>;
+		avago,ps-threshold = <600>;
+		avago,ps-hysteresis-threshold = <500>;
+		avago,ps-pulse = <8>;
+		avago,ps-pgain = <0>;
+		avago,als-B = <186>;
+		avago,als-C = <75>;
+		avago,als-D = <129>;
+		avago,ga-value = <98>;
+	};
+
+	st@18 {
+		compatible = "st,lis3dh";
+		reg = <0x18>;
+		pinctrl-names = "lis3dh_default","lis3dh_sleep";
+		pinctrl-0 = <0xd5>;
+		pinctrl-1 = <0xd6>;
+		interrupt-parent = <0x48>;
+		vdd-supply = <0x42>;
+		vddio-supply = <0x43>;
+		st,min-interval = <5>;
+		st,init-interval = <200>;
+		st,axis-map-x = <0>;
+		st,axis-map-y = <1>;
+		st,axis-map-z = <2>;
+		st,g-range = <2>;
+		st,gpio-int1 = <0x48 0x73 0x2002>;
+		st,negate-x;
+		st,negate-y;
+	};
+
+	tps65132@3e {
+		compatible = "ti,tps65132";
+		reg = <0x3e>;
+		i2c-pwr-supply = <0x43>;
+		ti,en-gpio-lpm;
+		pinctrl-names = "default";
+		pinctrl-0 = <0xd7>;
+
+		regulators {
+			tps65132_pos: pos-boost {
+				regulator-name = "tps65132-pos";
+				regulator-min-microvolt = <5400000>;
+				regulator-max-microvolt = <5400000>;
+				ti,discharge-enable;
+				ti,enable-time = <800>;
+				ti,current-limit = <200000>;
+				ti,en-gpio = <0x48 0x61 0x0>;
+			};
+
+			tps65132_neg: neg-boost {
+				regulator-name = "tps65132-neg";
+				regulator-min-microvolt = <5400000>;
+				regulator-max-microvolt = <5400000>;
+				ti,discharge-enable;
+				ti,enable-time = <800>;
+				ti,current-limit = <40000>;
+				ti,en-gpio = <0x48 0x20 0x0>;
+			};
+		};
+	};
+
+	flash_lm3642:qcom,led-flash@63 {
+		reg = <0x63>;
+		cell-index = <0>;
+		qcom,slave-id = <0xC6 0x00 0x0011>;
+		compatible = "ti,lm3642";
+		label = "lm3642";
+		qcom,flash-type = <1>;
+		pinctrl-names = "cam_flash_default","cam_flash_suspend";
+		pinctrl-0 = <0xd8>;
+		pinctrl-1 = <0xd9>;
+		gpios = <0x48 0x56 0x0 0x48 0x1f 0x0>;
+		qcom,gpio-flash-en = <0>;
+		qcom,gpio-flash-now = <1>;
+		qcom,gpio-req-tbl-num = <0 1>;
+		qcom,gpio-req-tbl-flags = <0 0>;
+		qcom,gpio-req-tbl-label = "FLASH_EN",
+			"FLASH_NOW";
+	};
+};
+
+&mdss_mdp {
+	qcom,mdss-pref-prim-intf = "dsi";
+};
+
+&pmx_mdss {
+	qcom,num-grp-pins = <1>;
+        qcom,pins = <0xff 0x19>;
+};
+
+&mdss_dsi0 {
+	qcom,dsi-pref-prim-pan = <0x45>;
+	pinctrl-names = "mdss_default", "mdss_sleep";
+	pinctrl-0 = <0x46>;
+	pinctrl-1 = <0x47>;
+	qcom,platform-reset-gpio = <0x48 0x19 0x0>;
+	vsp-supply = <0x49>;
+	vsn-supply = <0x4a>;
+	qcom,panel-supply-entries {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		qcom,panel-supply-entry@2 {
+			reg = <2>;
+			qcom,supply-name = "vsp";
+			qcom,supply-min-voltage = <5400000>;
+			qcom,supply-max-voltage = <5400000>;
+			qcom,supply-enable-load = <200>;
+			qcom,supply-disable-load = <0>;
+		};
+
+		qcom,panel-supply-entry@3 {
+			reg = <3>;
+			qcom,supply-name = "vsn";
+			qcom,supply-min-voltage = <5400000>;
+			qcom,supply-max-voltage = <5400000>;
+			qcom,supply-enable-load = <40>;
+			qcom,supply-disable-load = <0>;
+		};
+	};
+};
+
+&dsi_innolux_720p_video {
+	qcom,cont-splash-enabled;
+	qcom,esd-check-enabled;
+};
+
+&soc {
+	spi_0 {
+		status = "disabled";
+	};
+
+	gpio-leds {
+		compatible = "gpio-leds";
+		status = "okay";
+		pinctrl-names = "default";
+		pinctrl-0 = <0x104>;
+
+		red {
+			gpios = <0x48 0x8 0x0>;
+			label = "red";
+			linux,default-trigger = "none";
+			default-state = "off";
+			retain-state-suspended;
+		};
+
+		green {
+			gpios = <0x48 0x9 0x0>;
+			label = "green";
+			linux,default-trigger = "none";
+			default-state = "off";
+			retain-state-suspended;
+		};
+
+		blue {
+			gpios = <0x48 0xa 0x0>;
+			label = "blue";
+			linux,default-trigger = "none";
+			default-state = "off";
+		};
+	};
+
+	sound {
+		compatible = "qcom,msm8x16-audio-codec";
+		qcom,model = "msm8x16-skuh-snd-card";
+		qcom,msm-snd-card-id = <0>;
+		qcom,msm-ext-pa = "primary";
+		qcom,msm-codec-type = "internal";
+		qcom,msm-mbhc-hphl-swh = <1>;
+		qcom,msm-mbhc-gnd-swh = <0>;
+		pinctrl-names = "cdc_lines_act", "cdc_lines_sus";
+		pinctrl-0 = <0x105>;
+		pinctrl-1 = <0x106>;
+	};
+
+	i2c@78b9000 { /* BLSP1 QUP5 */
+		synaptics@70 {
+			compatible = "synaptics,rmi4";
+			reg = <0x70>;
+			interrupt-parent = <0x48>;
+			interrupts = <13 0x2008>;
+			vdd-supply = <0xdc>;
+		        vcc_i2c-supply = <0xdd>;
+			/* pins used by touchscreen */
+			pinctrl-names = "pmx_ts_active","pmx_ts_suspend";
+			pinctrl-0 = <0xde 0xdf>;
+			pinctrl-1 = <0xe0 0xe1>;
+			synaptics,display-coords = <0 0 1100 1756>;
+			synaptics,panel-coords = <0 0 1100 1899>;
+			synaptics,irq-gpio = <0x48 0xd 0x2008>;
+			synaptics,reset-gpio = <0x48 0xc 0x0>;
+			synaptics,i2c-pull-up;
+			synaptics,power-down;
+			synaptics,disable-gpios;
+			synaptics,fw-image-name = "PR1601177-s3207_8916_qrd_00430000.img";
+		};
+	};
+};
+
+&pm8916_vadc {
+	chan@30 {
+		qcom,scale-function = <10>;
+	};
+};
+
+&pm8916_adc_tm {
+	chan@30 {
+		qcom,scale-function = <6>;
+	};
+};
+
+&pm8916_chg {
+	qcom,vddmax-mv = <4350>;
+	qcom,vddsafe-mv = <4380>;
+	qcom,vinmin-mv = <4470>;
+	qcom,batt-hot-percentage = <35>;
+	qcom,batt-cold-percentage = <70>;
+	qcom,tchg-mins = <360>;
+	status = "okay";
+};
+
+/ {
+	qrd_batterydata: qcom,battery-data {
+		qcom,rpull-up-kohm = <0x44>;
+		qcom,vref-batt-therm = <0x1b7740>;
+
+		#include "batterydata-nokia-BV5S-1800mAh-512MB_QRD_SKUH.dtsi"
+	};
+};
+
+&pm8916_bms {
+	status = "ok";
+	qcom,battery-data = <0xed>;
+};
+
+&sdc2_cd_on {
+	/delete-property/ bias-pull-up;
+	bias-disable;
+};
+
+&sdhc_2 {
+	qcom,vdd-always-on;
+	qcom,vdd-lpm-sup;
+
+	qcom,vdd-current-level = <4000 400000>;
+};
+

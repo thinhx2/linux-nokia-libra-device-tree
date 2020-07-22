@@ -1,0 +1,99 @@
+/* Copyright (c) 2014, The Linux Foundation. All rights reserved.
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 and
+ * only version 2 as published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+&soc {
+	msm_gpu: qcom,kgsl-3d0@01c00000 {
+		label = "kgsl-3d0";
+		compatible = "qcom,kgsl-3d0", "qcom,kgsl-3d";
+		reg = <0x01c00000 0x10000
+		       0x01c10000 0x10000>;
+		reg-names = "kgsl_3d0_reg_memory" , "kgsl_3d0_shader_memory";
+		interrupts = <0 33 0>;
+		interrupt-names = "kgsl_3d0_irq";
+		qcom,id = <0>;
+
+		qcom,chipid = <0x03000600>;
+
+		qcom,initial-pwrlevel = <1>;
+
+		/* Idle Timeout = HZ/12 */
+		qcom,idle-timeout = <8>;
+		qcom,strtstp-sleepwake;
+
+		/*
+		 * Clocks = KGSL_CLK_CORE | KGSL_CLK_IFACE | KGSL_CLK_MEM |
+		 * KGSL_CLK_MEM_IFACE | KGSL_CLK_ALT_MEM_IFACE
+		 */
+		qcom,clk-map = <0x0000005E>;
+		clocks = <0x39 0x49a51fd9 0x39 0xd15c8a00 0x39 0x5620913a 0x39 0x3edd69ad 0x39 0x19922503 0x39 0xb432168e>;
+		clock-names = "core_clk", "iface_clk", "mem_clk",
+				"mem_iface_clk", "alt_mem_iface_clk",
+				"gtcu_iface_clk";
+
+		/* Bus Scale Settings */
+		qcom,msm-bus,name = "grp3d";
+		qcom,msm-bus,num-cases = <4>;
+		qcom,msm-bus,num-paths = <1>;
+		qcom,msm-bus,vectors-KBps = <0x1a 0x200 0x0 0x0 0x1a 0x200 0x0 0x186a00 0x1a 0x200 0x0 0x30d400 0x1a 0x200 0x0 0x411040>;
+		vdd-supply = <0x3a>;
+		iommu = <0x3b>;
+
+		/* Trace bus */
+		coresight-id = <67>;
+		coresight-name = "coresight-gfx";
+		coresight-nr-inports = <0>;
+		coresight-outports = <0>;
+		coresight-child-list = <&funnel_in0>;
+		coresight-child-ports = <5>;
+
+		/* CPU latency parameter */
+		qcom,pm-qos-latency = <701>;
+
+		/* Power levels */
+		qcom,gpu-pwrlevels {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			compatible = "qcom,gpu-pwrlevels";
+
+			qcom,gpu-pwrlevel@0 {
+				reg = <0>;
+				qcom,gpu-freq = <400000000>;
+				qcom,bus-freq = <3>;
+				qcom,io-fraction = <33>;
+			};
+
+			qcom,gpu-pwrlevel@1 {
+				reg = <1>;
+				qcom,gpu-freq = <310000000>;
+				qcom,bus-freq = <2>;
+				qcom,io-fraction = <66>;
+			};
+
+			qcom,gpu-pwrlevel@2 {
+				reg = <2>;
+				qcom,gpu-freq = <200000000>;
+				qcom,bus-freq = <1>;
+				qcom,io-fraction = <100>;
+			};
+
+			qcom,gpu-pwrlevel@3 {
+				reg = <3>;
+				qcom,gpu-freq = <19200000>;
+				qcom,bus-freq = <0>;
+				qcom,io-fraction = <0>;
+			};
+		};
+
+	};
+};
+
